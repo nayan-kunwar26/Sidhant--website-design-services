@@ -61,6 +61,7 @@ const createZoomMeeting = async (topic, duration, start_time) => {
       data,
       { headers }
     );
+    
     if (meetingResponse.status !== 201) {
       return "Unable to generate meeting link";
     }
