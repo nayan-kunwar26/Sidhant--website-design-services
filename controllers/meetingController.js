@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
 
   try {
     const createdMeeting = await createZoomMeeting(topic, duration, start_time);
-    console.log(`createdMeeting: ${createdMeeting}`);
+    //console.log(`createdMeeting: ${createdMeeting}`);
     return res
       .status(200)
       .json({ msg: "Meeting created successfully", meeting: createdMeeting });

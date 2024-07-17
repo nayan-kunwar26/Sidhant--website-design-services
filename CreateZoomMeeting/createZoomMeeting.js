@@ -35,7 +35,7 @@ const createZoomMeeting = async (topic, duration, start_time) => {
       });
     //console.log(`authResponse: ${authResponse}`);
 
-    //const access_token = authResponse.access_token;
+    const access_token = authResponse.access_token;
     console.log(`access_token: ${access_token}`);
 
     const headers = {
@@ -61,7 +61,7 @@ const createZoomMeeting = async (topic, duration, start_time) => {
       data,
       { headers }
     );
-    
+
     if (meetingResponse.status !== 201) {
       return "Unable to generate meeting link";
     }
