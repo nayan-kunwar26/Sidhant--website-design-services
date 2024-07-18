@@ -22,7 +22,7 @@ let config = {
   },
 };
 // function to create a zoom meeting, it's requires 3 parameters (topic as String, duratioin as Numbers, start_time as Date)
-const createZoomMeeting = async (topic, duration, start_time) => {
+const createMeeting = async (topic, duration, start_time) => {
   try {
     let authResponse;
     await axios
@@ -36,7 +36,7 @@ const createZoomMeeting = async (topic, duration, start_time) => {
     //console.log(`authResponse: ${authResponse}`);
 
     const access_token = authResponse.access_token;
-    console.log(`access_token: ${access_token}`);
+    //console.log(`access_token: ${access_token}`);
 
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -80,4 +80,4 @@ const createZoomMeeting = async (topic, duration, start_time) => {
   }
 };
 
-export default createZoomMeeting;
+export default createMeeting;

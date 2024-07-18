@@ -1,13 +1,14 @@
 import dotenv from "dotenv";
 import express from "express";
-import meetingController from "./controllers/meetingController.js"
+import meetingRoutes from "./routes/meetingRoutes/meetingRoutes.js";
+import webinarRoutes from "./controllers/webinar/webinarConroller.js";
 
 const app = express();
 
-
 app.use(express.json({ extended: false }));
 
-app.use("/api/meeting/", meetingController);
+app.use("/api/meeting", meetingRoutes);
+app.use("/api/webinar", webinarRoutes);
 
 dotenv.config();
 app.get("/", (req, res) => {
