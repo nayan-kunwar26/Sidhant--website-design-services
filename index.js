@@ -7,6 +7,7 @@ const app = express();
 
 app.use(express.json({ extended: false }));
 
+//Routes
 app.use("/api/meeting", meetingRoutes);
 app.use("/api/webinar", webinarRoutes);
 

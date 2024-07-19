@@ -1,5 +1,5 @@
 import express from "express";
-import createZoomWebinar from "../../CreateZoomWebinar/createZoomWebinar.js";
+import createZoomWebinar from "../../services/zoom/createZoomWebinar/createZoomWebinar.js";
 
 const router = express.Router();
 

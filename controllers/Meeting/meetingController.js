@@ -1,4 +1,4 @@
-import createMeeting from "../../CreateZoomMeeting/createZoomMeeting.js";
+import createMeeting from "../../services/zoom/createZoomMeeting/createZoomMeeting.js";
 
 export const createZoomMeeting = async (req, res) => {
   const { topic } = req.body || "";

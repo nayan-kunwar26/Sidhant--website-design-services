@@ -21,6 +21,7 @@ let config = {
     password: process.env.ZOOM_CLIENT_SECRET,
   },
 };
+
 // function to create a zoom meeting, it's requires 3 parameters (topic as String, duratioin as Numbers, start_time as Date)
 const createMeeting = async (topic, duration, start_time) => {
   try {
