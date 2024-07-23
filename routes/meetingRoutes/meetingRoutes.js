@@ -1,8 +1,9 @@
 import express from "express";
-import { createZoomMeeting } from "../../controllers/Meeting/meetingController.js";
+import { createZoomMeeting, createZoomWebinar } from "../../controllers/zoom/zoom.js";
 
 const router = express.Router();
 
-router.route("/create").post(createZoomMeeting);
+router.route("/meeting").post(createZoomMeeting);
+router.route("/webinar").post(createZoomWebinar); // webinar plan is missing
 
 export default router;
