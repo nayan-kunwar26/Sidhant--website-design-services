@@ -17,7 +17,7 @@ let config = {
   },
 };
 
-const createZoomWebinar = async (topic, duration, start_time) => {
+const createWebinar = async (topic, duration, start_time) => {
   try {
     let authResponse;
     await axios
@@ -124,4 +124,4 @@ const createZoomWebinar = async (topic, duration, start_time) => {
   }
 };
 
-export default createZoomWebinar;
+export default createWebinar;

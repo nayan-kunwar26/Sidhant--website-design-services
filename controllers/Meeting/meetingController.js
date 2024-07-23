@@ -1,6 +1,8 @@
 import createMeeting from "../../services/zoom/createZoomMeeting/createZoomMeeting.js";
+import { asyncHandler } from "../../utils/errors/asyncHandler.js";
+import ErrorResponse from "../../utils/errors/ErrorResponse.js";
 
-export const createZoomMeeting = async (req, res) => {
+export const createZoomMeeting = asyncHandler(async (req, res, next) => {
   const { topic } = req.body || "";
   const { duration } = req.body || 30;
   const { start_time } = req.body || new Date();
@@ -12,6 +14,6 @@ export const createZoomMeeting = async (req, res) => {
       .status(200)
       .json({ msg: "Meeting created successfully", meeting: createdMeeting });
   } catch (err) {
-    return res.status(400).json({ msg: err.message });
+    next(new ErrorResponse(err.message, 400));
   }
-};
+});
