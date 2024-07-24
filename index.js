@@ -1,15 +1,21 @@
 import dotenv from "dotenv";
 import express from "express";
-import zoomRoutes from "./routes/meetingRoutes/meetingRoutes.js";
-
+import zoomRoutes from "./routes/zoom/meetingRoutes.js";
+import { initializeDiscordBot } from "./services/discord/discord.js";
+import discordRotes from "./routes/discord/discordRoutes.js"
 const app = express();
+
+dotenv.config();
 
 app.use(express.json({ extended: false }));
 
+initializeDiscordBot(); 
+
 //Routes
 app.use("/api/v1/zoom/", zoomRoutes);
+app.use("/api/v1/discord", discordRotes);
 
-dotenv.config();
+
 app.get("/", (req, res) => {
   res.send("Server up and running");
 });
