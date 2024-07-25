@@ -4,6 +4,7 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
   ],
 });
 
@@ -18,6 +19,7 @@ export const initializeDiscordBot = () => {
       message.channel.send("Hello Geeks!!");
     }
   });
+
   client.login(process.env.DISCORD_BOT_TOKEN);
 
   client.once("ready", () => {
@@ -54,6 +56,23 @@ export const createInvite = async (guildId, channelId) => {
     return invite.url;
   } catch (error) {
     console.error("Error creating Discord invite:", error);
+    throw error;
+  }
+};
+
+export const listGuildMembers = async (guildId) => {
+  try {
+    const guild = await client.guilds.fetch(guildId);
+    await guild.members.fetch(); // Fetch all members in the guild
+
+    return guild.members.cache.map(member => ({
+      id: member.id,
+      username: member.user.username,
+      discriminator: member.user.discriminator,
+      status: member.presence ? member.presence.status : 'offline'
+    }));
+  } catch (error) {
+    console.error('Error fetching guild members:', error);
     throw error;
   }
 };
