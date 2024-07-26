@@ -22,10 +22,7 @@ export const getGuildMembers = asyncHandler(async (req, res, next) => {
   if (!guildId) {
     return next(new ErrorResponse("guildId is required", 400));
   }
-
- 
   const members = await listGuildMembers(guildId);
   if (!members) next(new ErrorResponse("Failed to fetch guild members", 500));
-  
   res.status(200).json({ members });
 });

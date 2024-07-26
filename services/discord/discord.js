@@ -5,6 +5,7 @@ const client = new Client({
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildPresences,
   ],
 });
 
@@ -42,15 +43,13 @@ export const createInvite = async (guildId, channelId) => {
   try {
     const guild = await client.guilds.fetch(guildId);
     const channel = guild.channels.cache.get(channelId);
-    console.log(`guild: ${guild}`);
-    console.log(`channel: ${channel}`);
     if (!channel) {
       throw new Error("Channel not found");
     }
 
     const invite = await channel.createInvite({
       maxAge: 86400, // 1 day
-      maxUses: 1, // 10 uses
+      maxUses: 1, // 1 uses
     });
 
     return invite.url;
@@ -65,14 +64,14 @@ export const listGuildMembers = async (guildId) => {
     const guild = await client.guilds.fetch(guildId);
     await guild.members.fetch(); // Fetch all members in the guild
 
-    return guild.members.cache.map(member => ({
+    return guild.members.cache.map((member) => ({
       id: member.id,
       username: member.user.username,
-      discriminator: member.user.discriminator,
-      status: member.presence ? member.presence.status : 'offline'
+      joinedAt: member.joinedAt,
+      status: member.presence?.status || "offline", 
     }));
   } catch (error) {
-    console.error('Error fetching guild members:', error);
+    console.error("Error fetching guild members:", error);
     throw error;
   }
 };
